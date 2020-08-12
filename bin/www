@@ -11,21 +11,26 @@ var http = require('http');
 var https = require('https');
 var fs = require('fs');
 
-app.set('secPort',port+443);
+
 /**
  * Get port from environment and store in Express.
  */
 
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
-
+app.set('secPort',port+443);
 /**
  * Create HTTP server.
  */
-
- /*
 var server = http.createServer(app);
-*/
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
 
 var options = {
   key: fs.readFileSync(__dirname+'/67241223_localhost.key'),
@@ -39,13 +44,9 @@ secureServer.listen(app.get('secPort'), () => {
 });
 secureServer.on('error', onError);
 secureServer.on('listening', onListening);
-/**
- * Listen on provided port, on all network interfaces.
- */
 
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+
+
 
 /**
  * Normalize a port into a number, string, or false.
