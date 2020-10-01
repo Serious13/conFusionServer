@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-var authenticate = require('../authenticate');
+var   authenticate = require('../authenticate');
 
 const Dishes = require('../models/dishes');
 const cors = require('./cors');
@@ -14,7 +14,7 @@ dishRouter.use(bodyParser.json());
 dishRouter.route('/')
 .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
 .get(cors.cors,(req,res,next) => {
-    Dishes.find({})
+    Dishes.find(req.query)
     .populate('comments.author')
     .then((dishes) => {
         res.statusCode = 200;
@@ -50,7 +50,7 @@ dishRouter.route('/')
     .catch((err) => next(err));    
 });
 
-
+//DISH ID
 dishRouter.route('/:dishId')
 .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
 .get(cors.cors,(req,res,next) => {
@@ -92,7 +92,7 @@ dishRouter.route('/:dishId')
 
 });
 
-
+//DISH ID COMMENTS
 dishRouter.route('/:dishId/comments')
 .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
 .get(cors.cors,(req,res,next) => {

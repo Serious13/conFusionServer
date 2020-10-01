@@ -6,11 +6,11 @@ var passportLocalMongoose = require('passport-local-mongoose');
 var User = new Schema({
     firstname: {
       type: String,
-        default: ''
+      default: ''
     },
     lastname: {
       type: String,
-        default: ''
+      default: ''
     },
     facebookId: String,
     admin:   {
@@ -22,4 +22,4 @@ var User = new Schema({
 User.plugin(passportLocalMongoose);
 
 
-module.exports = mongoose.model('User', User);
+module.exports = mongoose.model('User' , User);
